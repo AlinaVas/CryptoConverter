@@ -39,6 +39,15 @@ class CryptoListVC: UITableViewController {
         return UITableViewCell()
     }
 
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let converterVC = storyboard?.instantiateViewController(withIdentifier: "ConverterVC") as! ConverterVC
+        
+        navigationController?.pushViewController(converterVC, animated: true)
+    }
+    
 }
 
 extension CryptoListVC: CryptoListDelegate {

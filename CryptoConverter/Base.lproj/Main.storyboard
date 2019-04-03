@@ -73,20 +73,79 @@
             </objects>
             <point key="canvasLocation" x="364" y="-22.03898050974513"/>
         </scene>
-        <!--ConverterVC-->
+        <!--Converter-->
         <scene sceneID="luU-E2-tNZ">
             <objects>
-                <viewController id="fh4-2L-RKl" customClass="ConverterVC" customModule="CryptoConverter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConverterVC" id="fh4-2L-RKl" customClass="ConverterVC" customModule="CryptoConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iK5-8Q-n7j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSc-5i-qUx">
+                                <rect key="frame" x="257" y="382" width="75" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2f-y3-CYT">
+                                <rect key="frame" x="63" y="380" width="168" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aON-a2-xdQ">
+                                <rect key="frame" x="257" y="294" width="75" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20832774043083191" green="0.24694621562957764" blue="0.30589115619659424" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <state key="normal" title="convert">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKX-lx-yOG">
+                                <rect key="frame" x="98" y="294" width="50" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="swap"/>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fD9-9A-inP">
+                                <rect key="frame" x="45" y="197" width="285" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fwc-q3-nhX">
+                                        <rect key="frame" x="8" y="16" width="168" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecB-SQ-hJo">
+                                        <rect key="frame" x="202" y="16" width="75" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="czx-DJ-LwS"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Converter" id="HtE-id-rty"/>
+                    <connections>
+                        <outlet property="convertButton" destination="aON-a2-xdQ" id="T4C-nx-uIW"/>
+                        <outlet property="fromLabel" destination="ecB-SQ-hJo" id="5pE-2D-sRy"/>
+                        <outlet property="fromTextField" destination="Fwc-q3-nhX" id="Vey-wg-DY5"/>
+                        <outlet property="toLabel" destination="NSc-5i-qUx" id="1o4-wd-Vbm"/>
+                        <outlet property="toTextField" destination="y2f-y3-CYT" id="oh7-SK-7YR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iL7-p0-8Xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="-22"/>
+            <point key="canvasLocation" x="1061.5999999999999" y="-22.03898050974513"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vXk-LN-s7q">
@@ -107,4 +166,7 @@
             <point key="canvasLocation" x="-330" y="-22"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="swap" width="512" height="512"/>
+    </resources>
 </document>

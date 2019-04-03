@@ -10,9 +10,17 @@ import UIKit
 
 class ConverterVC: UIViewController {
 
+    @IBOutlet weak var fromTextField: UITextField!
+    @IBOutlet weak var toTextField: UITextField!
+    @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var toLabel: UILabel!
+    @IBOutlet weak var convertButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        toTextField.isUserInteractionEnabled = false
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CCAC09E2255FA2000292288 /* ConverterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCAC09D2255FA2000292288 /* ConverterPresenter.swift */; };
 		2CCD59562254A08B00CB0E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD59552254A08B00CB0E0B /* AppDelegate.swift */; };
 		2CCD59582254A08B00CB0E0B /* ConverterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD59572254A08B00CB0E0B /* ConverterVC.swift */; };
 		2CCD595B2254A08B00CB0E0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCD59592254A08B00CB0E0B /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CCAC09D2255FA2000292288 /* ConverterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterPresenter.swift; sourceTree = "<group>"; };
 		2CCD59522254A08B00CB0E0B /* CryptoConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCD59552254A08B00CB0E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CCD59572254A08B00CB0E0B /* ConverterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterVC.swift; sourceTree = "<group>"; };
@@ -48,6 +50,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C75CED32255EB8D008052DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD59672254A44800CB0E0B /* CryptoListVC.swift */,
+				2CCD59572254A08B00CB0E0B /* ConverterVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2CCAC09B2255EBD200292288 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD596D2254AC8C00CB0E0B /* Crypto.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2CCAC09C2255EBDF00292288 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD59692254A75A00CB0E0B /* CryptoListPresenter.swift */,
+				2CCAC09D2255FA2000292288 /* ConverterPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		2CCD59492254A08B00CB0E0B = {
 			isa = PBXGroup;
 			children = (
@@ -70,10 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				2CCD59552254A08B00CB0E0B /* AppDelegate.swift */,
-				2CCD59572254A08B00CB0E0B /* ConverterVC.swift */,
-				2CCD59672254A44800CB0E0B /* CryptoListVC.swift */,
-				2CCD596D2254AC8C00CB0E0B /* Crypto.swift */,
-				2CCD59692254A75A00CB0E0B /* CryptoListPresenter.swift */,
+				2C75CED32255EB8D008052DD /* Views */,
+				2CCAC09B2255EBD200292288 /* Models */,
+				2CCAC09C2255EBDF00292288 /* Presenters */,
 				2CCD59592254A08B00CB0E0B /* Main.storyboard */,
 				2CCD596B2254A79F00CB0E0B /* CryptoCell.swift */,
 				2CCD595C2254A08B00CB0E0B /* Assets.xcassets */,
@@ -175,15 +202,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CryptoConverter/Pods-CryptoConverter-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 			);
@@ -197,15 +220,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-CryptoConverter-checkManifestLockResult.txt",
 			);
@@ -223,6 +242,7 @@
 			files = (
 				2CCD596E2254AC8C00CB0E0B /* Crypto.swift in Sources */,
 				2CCD596C2254A79F00CB0E0B /* CryptoCell.swift in Sources */,
+				2CCAC09E2255FA2000292288 /* ConverterPresenter.swift in Sources */,
 				2CCD59582254A08B00CB0E0B /* ConverterVC.swift in Sources */,
 				2CCD596A2254A75A00CB0E0B /* CryptoListPresenter.swift in Sources */,
 				2CCD59562254A08B00CB0E0B /* AppDelegate.swift in Sources */,

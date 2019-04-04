@@ -9,6 +9,7 @@
 import Foundation
 
 struct Crypto {
+    var id: Int
     var name: String
     var priceUSD: Double
 }

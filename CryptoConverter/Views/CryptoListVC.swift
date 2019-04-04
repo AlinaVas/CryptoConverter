@@ -44,10 +44,9 @@ class CryptoListVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let converterVC = storyboard?.instantiateViewController(withIdentifier: "ConverterVC") as! ConverterVC
-        
+        converterVC.presenter = ConverterPresenter(crypto: presenter.getCryptoFromList(at: indexPath.row))
         navigationController?.pushViewController(converterVC, animated: true)
     }
-    
 }
 
 extension CryptoListVC: CryptoListDelegate {

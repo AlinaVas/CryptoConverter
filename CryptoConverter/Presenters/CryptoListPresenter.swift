@@ -19,38 +19,31 @@ class CryptoListPresenter {
     
     private var cryptoList: [Crypto] = []
     
-    
-    
     init() {
         requestCryptoList()
     }
     
-    //    completion: (Result<(URLResponse, Data), Failure>) -> Void
     func requestCryptoList() {
         
         guard let url = URL(string: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest") else {
-            //            completion(.failure(.badURLFormat))
             print("badurl")
             return
         }
         
         guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
-            //            completion(.failure(.apiNotProvided))
             print("no api")
             return
         }
         
         let parameters = ["start" : "1",
-                          "limit" : "1000",
-                          "convert" : "USD"]
+                          "limit" : "1000"]
         
         let headers = ["X-CMC_PRO_API_KEY" : apiKey]
         
-        Alamofire.request(url, method: .get, parameters: parameters, headers: headers) .responseJSON {
+        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON {
             response in
             
             guard response.result.isSuccess else {
-                //                completion(.failure(.failure(<#T##Error#>)))
                 print("server is error \(response)")
                 return
             }
@@ -65,27 +58,28 @@ class CryptoListPresenter {
     }
     
     func handleError(error: Error) {
-        
+        // parse status to get error msg
     }
     
     func extractCryptoInfo(from data: Data) {
         do {
-            let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-            //                print(jsonResponse)
-            let data = jsonResponse["data"] as! [[String:Any]]
-            //                    print(data)
-            for item in data {
-                if let name = item["name"] as? String  {
-                    if let quote = item["quote"] as? [String:Any] {
-                        if let usd = quote["USD"] as? [String:Any] {
-                            if let price = usd["price"] as? Double {
-                                self.cryptoList.append(Crypto(name: name, priceUSD: price))
+            if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+                if let data = jsonResponse["data"] as? [[String:Any]] {
+                    for item in data {
+                        if let name = item["name"] as? String  {
+                            if let id = item["id"] as? Int {
+                                if let quote = item["quote"] as? [String:Any] {
+                                    if let usd = quote["USD"] as? [String:Any] {
+                                        if let price = usd["price"] as? Double {
+                                            self.cryptoList.append(Crypto(id: id, name: name, priceUSD: price))
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-            
             print("********************",cryptoList.count)
             DispatchQueue.main.async {
                 self.viewDelegate?.updateTable()
@@ -94,6 +88,10 @@ class CryptoListPresenter {
         } catch {
             print("error parsing : \(error.localizedDescription)")
         }
+    }
+    
+    func getCryptoFromList(at index: Int) -> Crypto {
+        return cryptoList[index]
     }
     
 }

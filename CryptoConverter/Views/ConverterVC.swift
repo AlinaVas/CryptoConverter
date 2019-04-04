@@ -27,18 +27,18 @@ class ConverterVC: UIViewController {
         
         toTextField.isUserInteractionEnabled = false
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: true)
+        
+        fromTextField.delegate = self
+        fromTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func convertButtonPressed(_ sender: UIButton) {
-        
         guard fromTextField.text != "" else { return }
+        
         let directConversion = toLabel.text == "USD" ? true : false
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
+        
+        fromTextField.resignFirstResponder()
     }
     
     @IBAction func swapButtonPressed(_ sender: UIButton) {
@@ -48,8 +48,23 @@ class ConverterVC: UIViewController {
         let directConversion = toLabel.text == "USD" ? true : false
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
     }
+}
+
+extension ConverterVC: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        let directConversion = toLabel.text == "USD" ? true : false
+        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
+        
+        textField.resignFirstResponder()
+        return false
+    }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        let directConversion = toLabel.text == "USD" ? true : false
+        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
+    }
 }
 
 extension ConverterVC: ConverterDelegate {
@@ -61,7 +76,6 @@ extension ConverterVC: ConverterDelegate {
         fromLabel.text = symbol
     }
     
-    
-    
 }
+
 

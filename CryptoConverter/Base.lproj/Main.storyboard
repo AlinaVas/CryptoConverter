@@ -108,7 +108,7 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecB-SQ-hJo">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecB-SQ-hJo">
                                                 <rect key="frame" x="208" y="16" width="69" height="37"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -185,7 +185,7 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-h8-GIc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-h8-GIc">
                                                 <rect key="frame" x="208" y="16" width="69" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -249,6 +249,9 @@
                                                 <state key="normal" title="convert">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="convertButtonPressed:" destination="fh4-2L-RKl" eventType="touchUpInside" id="PBd-6Y-36i"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKX-lx-yOG" userLabel="Swap Button">
                                                 <rect key="frame" x="8" y="0.0" width="54" height="45"/>
@@ -273,6 +276,9 @@
                                                         <include reference="mf3-aG-9Jx"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="swapButtonPressed:" destination="fh4-2L-RKl" eventType="touchUpInside" id="1KR-JF-ZVq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -427,7 +433,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Converter" id="HtE-id-rty"/>
                     <connections>
-                        <outlet property="VerticalCenteringConstraint" destination="vdZ-ZI-k3G" id="gV4-1O-4HU"/>
                         <outlet property="convertButton" destination="aON-a2-xdQ" id="T4C-nx-uIW"/>
                         <outlet property="fromLabel" destination="ecB-SQ-hJo" id="5pE-2D-sRy"/>
                         <outlet property="fromTextField" destination="Fwc-q3-nhX" id="Vey-wg-DY5"/>

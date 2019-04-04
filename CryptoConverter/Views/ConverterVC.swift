@@ -16,7 +16,6 @@ class ConverterVC: UIViewController {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var convertButton: UIButton!
-    @IBOutlet weak var VerticalCenteringConstraint: NSLayoutConstraint!
     
     var presenter: ConverterPresenter?
     
@@ -24,9 +23,10 @@ class ConverterVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        toTextField.isUserInteractionEnabled = false
-        
         presenter?.viewDelegate = self
+        
+        toTextField.isUserInteractionEnabled = false
+        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,16 +34,20 @@ class ConverterVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    override func viewWillLayoutSubviews() {
-//        switch UIDevice.current.orientation {
-//        case .portrait, .portraitUpsideDown, .faceUp, .faceDown, .unknown:
-//            print(<#T##items: Any...##Any#>)
-//        case .landscapeLeft, .landscapeRight:
-//            print(<#T##items: Any...##Any#>)
-//        }
-//
-//    }
+    @IBAction func convertButtonPressed(_ sender: UIButton) {
+        
+        guard fromTextField.text != "" else { return }
+        let directConversion = toLabel.text == "USD" ? true : false
+        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
+    }
     
+    @IBAction func swapButtonPressed(_ sender: UIButton) {
+        swap(&fromLabel.text!, &toLabel.text!)
+        fromTextField.text = toTextField.text
+        
+        let directConversion = toLabel.text == "USD" ? true : false
+        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
+    }
     
     
 }

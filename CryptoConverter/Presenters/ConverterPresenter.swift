@@ -102,4 +102,14 @@ class ConverterPresenter {
             }
         }
     }
+    
+    func convert(amount: String, isDirectConversion: Bool) -> String? {
+        guard let amount = Double(amount) else {
+            print("bad input")
+            return nil
+        }
+        
+        let rate = isDirectConversion ? selectedCrypto.priceUSD : 1 / selectedCrypto.priceUSD
+        return String(amount * rate)
+    }
 }

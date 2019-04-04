@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lh-Je-mxU" userLabel="Main View Container">
-                                <rect key="frame" x="45" y="178.5" width="285" height="310"/>
+                                <rect key="frame" x="45" y="95" width="285" height="310"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fD9-9A-inP" userLabel="From View Containter">
                                         <rect key="frame" x="0.0" y="96" width="285" height="71"/>
@@ -90,6 +91,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fwc-q3-nhX">
                                                 <rect key="frame" x="8" y="16" width="184" height="39"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="184" id="in1-FR-y7B"/>
                                                     <constraint firstAttribute="width" constant="184" id="wEP-j1-on9"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
@@ -167,6 +169,7 @@
                                                 <rect key="frame" x="8" y="16" width="184" height="39"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="184" id="uDz-dd-512"/>
+                                                    <constraint firstAttribute="width" constant="184" id="x9G-zz-dmC"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
@@ -182,7 +185,7 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-h8-GIc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-h8-GIc">
                                                 <rect key="frame" x="208" y="16" width="69" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -319,7 +322,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fja-0L-zbU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fja-0L-zbU">
                                         <rect key="frame" x="103" y="0.0" width="79" height="80"/>
                                     </imageView>
                                 </subviews>
@@ -342,7 +345,7 @@
                                     <constraint firstAttribute="trailing" secondItem="IEY-2z-rUv" secondAttribute="trailing" id="TaQ-PO-thK"/>
                                     <constraint firstItem="Fja-0L-zbU" firstAttribute="leading" secondItem="2lh-Je-mxU" secondAttribute="leading" id="VEC-me-436"/>
                                     <constraint firstItem="Fjw-2O-Ey5" firstAttribute="leading" secondItem="2lh-Je-mxU" secondAttribute="leading" constant="55" id="WWp-pr-YD1"/>
-                                    <constraint firstAttribute="width" constant="461" id="ZjE-9z-Plm"/>
+                                    <constraint firstAttribute="width" constant="451" id="ZjE-9z-Plm"/>
                                     <constraint firstItem="Fjw-2O-Ey5" firstAttribute="top" secondItem="fD9-9A-inP" secondAttribute="bottom" constant="13" id="bWY-0Z-5MQ"/>
                                     <constraint firstItem="IEY-2z-rUv" firstAttribute="top" secondItem="fD9-9A-inP" secondAttribute="bottom" constant="8" id="cQa-7E-qHb"/>
                                     <constraint firstItem="Fjw-2O-Ey5" firstAttribute="centerY" secondItem="2lh-Je-mxU" secondAttribute="centerY" id="e4N-Dy-w86"/>
@@ -404,7 +407,7 @@
                             <constraint firstItem="2lh-Je-mxU" firstAttribute="centerX" secondItem="iK5-8Q-n7j" secondAttribute="centerX" id="bTU-Fw-ujX"/>
                             <constraint firstItem="2lh-Je-mxU" firstAttribute="top" secondItem="czx-DJ-LwS" secondAttribute="top" id="g0A-hj-E8c"/>
                             <constraint firstItem="2lh-Je-mxU" firstAttribute="centerX" secondItem="iK5-8Q-n7j" secondAttribute="centerX" id="oJd-X3-83L"/>
-                            <constraint firstItem="2lh-Je-mxU" firstAttribute="centerY" secondItem="iK5-8Q-n7j" secondAttribute="centerY" id="vdZ-ZI-k3G"/>
+                            <constraint firstItem="2lh-Je-mxU" firstAttribute="centerY" secondItem="iK5-8Q-n7j" secondAttribute="centerY" multiplier="3:4" id="vdZ-ZI-k3G"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="czx-DJ-LwS"/>
                         <variation key="default">

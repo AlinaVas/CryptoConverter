@@ -8,11 +8,16 @@
 
 import Foundation
 
+//  MARK: - ConverterPresenterDelegate (required methods for viewDelegate's UI updates)
+
 protocol ConverterPresenterDelegate: class {
     func updateLogo(with imageData: Data)
     func updateCryptoNameLabel(with symbol: String)
     func showAlert(msg: String)
 }
+
+
+//  MARK: - CryptoListPresenter
 
 class ConverterPresenter {
     
@@ -47,6 +52,7 @@ class ConverterPresenter {
         }
     }
     
+    // Get logo image data for specific cryptocurrency
     
     func downloadLogo() {
         APIManager.shared.downloadImageData(from: logoImageURL) { imageData in

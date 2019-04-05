@@ -15,30 +15,24 @@ class ConverterVC: UIViewController {
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
-    @IBOutlet weak var convertButton: UIButton!
     
     var presenter: ConverterPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         presenter?.viewDelegate = self
+        setUpViews()
+    }
+    
+    private func setUpViews() {
+        toLabel.text = "USD"
         
         toTextField.isUserInteractionEnabled = false
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: true)
         
         fromTextField.delegate = self
         fromTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-    }
-
-    @IBAction func convertButtonPressed(_ sender: UIButton) {
-        guard fromTextField.text != "" else { return }
-        
-        let directConversion = toLabel.text == "USD" ? true : false
-        toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
-        
-        fromTextField.resignFirstResponder()
     }
     
     @IBAction func swapButtonPressed(_ sender: UIButton) {
@@ -49,6 +43,8 @@ class ConverterVC: UIViewController {
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
     }
 }
+
+//  MARK: - UITextField methods
 
 extension ConverterVC: UITextFieldDelegate {
     
@@ -61,19 +57,33 @@ extension ConverterVC: UITextFieldDelegate {
         return false
     }
     
+    
+    // Custom method that is called on any changes of text in UITextField
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         let directConversion = toLabel.text == "USD" ? true : false
         toTextField.text = presenter?.convert(amount: fromTextField.text!, isDirectConversion: directConversion)
     }
 }
 
-extension ConverterVC: ConverterDelegate {
+
+
+//  MARK: - ConverterPresenterDelegate methods for updating UI
+
+extension ConverterVC: ConverterPresenterDelegate {
+    
     func updateLogo(with imageData: Data) {
         logoImageView.image = UIImage(data: imageData)
     }
     
-    func updateNameLabel(with symbol: String) {
+    func updateCryptoNameLabel(with symbol: String) {
         fromLabel.text = symbol
+    }
+    
+    func showAlert(msg: String) {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
 }

@@ -7,94 +7,52 @@
 //
 
 import Foundation
-import Alamofire
 
-protocol CryptoListDelegate: class {
+//  MARK: - ConverterPresenterDelegate (required methods for viewDelegate's UI updates)
+
+protocol CryptoListPresenterDelegate: class {
     func updateTable()
+    func showAlert(msg: String)
 }
+
+
+//  MARK: - CryptoListPresenter
 
 class CryptoListPresenter {
     
-    weak var viewDelegate: CryptoListDelegate?
+    weak var viewDelegate: CryptoListPresenterDelegate?
     
     private var cryptoList: [Crypto] = []
     
     init() {
-        requestCryptoList()
+        getCryptoList()
     }
     
-    func requestCryptoList() {
-        
-        guard let url = URL(string: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest") else {
-            print("badurl")
-            return
-        }
-        
-        guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
-            print("no api")
-            return
-        }
-        
-        let parameters = ["start" : "1",
-                          "limit" : "1000"]
-        
-        let headers = ["X-CMC_PRO_API_KEY" : apiKey]
-        
-        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON {
-            response in
-            
-            guard response.result.isSuccess else {
-                print("server is error \(response)")
-                return
-            }
-            
-            guard let data = response.data  else {
-                print("no data")
-                return
-            }
-
-            self.extractCryptoInfo(from: data)
-        }
-    }
     
-    func handleError(error: Error) {
-        // parse status to get error msg
-    }
+    // Get the list of cruptocurrency and its current price in USD
     
-    func extractCryptoInfo(from data: Data) {
-        do {
-            if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-                if let data = jsonResponse["data"] as? [[String:Any]] {
-                    for item in data {
-                        if let name = item["name"] as? String  {
-                            if let id = item["id"] as? Int {
-                                if let quote = item["quote"] as? [String:Any] {
-                                    if let usd = quote["USD"] as? [String:Any] {
-                                        if let price = usd["price"] as? Double {
-                                            self.cryptoList.append(Crypto(id: id, name: name, priceUSD: price))
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            print("********************",cryptoList.count)
-            DispatchQueue.main.async {
+    func getCryptoList() {
+        APIManager.shared.requestCryptoList { result in
+            switch result {
+            case .success(let cryptoList):
+                self.cryptoList = cryptoList
                 self.viewDelegate?.updateTable()
+            case .failure(let error):
+                self.viewDelegate?.showAlert(msg: error.description)
             }
-            
-        } catch {
-            print("error parsing : \(error.localizedDescription)")
         }
     }
     
-    func getCryptoFromList(at index: Int) -> Crypto {
+    
+    // Returns a Crypto from cryptoList (to pass to ConverterPresenter)
+    
+    func getCryptoItemFromList(at index: Int) -> Crypto {
         return cryptoList[index]
     }
-    
 }
+
+
+// Helpers for UITableView DataSource methods
 
 extension CryptoListPresenter {
     

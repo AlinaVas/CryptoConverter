@@ -7,105 +7,62 @@
 //
 
 import Foundation
-import Alamofire
 
-protocol ConverterDelegate: class {
+protocol ConverterPresenterDelegate: class {
     func updateLogo(with imageData: Data)
-    func updateNameLabel(with symbol: String)
-    
+    func updateCryptoNameLabel(with symbol: String)
+    func showAlert(msg: String)
 }
 
 class ConverterPresenter {
     
-    weak var viewDelegate: ConverterDelegate?
+    weak var viewDelegate: ConverterPresenterDelegate?
     
+    private let apiKey = "77537db6-78b4-4444-9f9c-8f52c572f15a"
     private let selectedCrypto: Crypto
+    private var logoImageURL: URL? {
+        didSet {
+            downloadLogo()
+        }
+    }
+    private var cryptoSymbolicName: String = ""
     
     init(crypto: Crypto) {
-        
         selectedCrypto = crypto
-        getDetailsForCrypto(with: selectedCrypto.id)
+        getCryptoLogoAndSymbolicName()
+    }
+    
+    // Get logo and symbolic name for specific cryptocurrency
+    
+    func getCryptoLogoAndSymbolicName() {
+        
+        APIManager.shared.getDetailsForCrypto(with: selectedCrypto.id) { result in
+            switch result {
+            case .success(let symbol, let logoURL):
+                self.viewDelegate?.updateCryptoNameLabel(with: symbol)
+                self.logoImageURL = URL(string: logoURL)
+            case .failure(let error):
+                self.viewDelegate?.showAlert(msg: "\(error)")
+            }
+        }
     }
     
     
-    
-    func getDetailsForCrypto(with id: Int) {
-        
-        guard let url = URL(string: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info") else {
-            print("badurl")
-            return
-        }
-        
-        guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
-            print("no api")
-            return
-        }
-        
-        let parameters = ["id" : "\(id)"]
-        
-        let headers = ["X-CMC_PRO_API_KEY" : apiKey]
-        
-        Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON {
-            response in
-            
-            guard response.result.isSuccess else {
-                print("server is error \(response)")
-                return
-            }
-            
-            guard let data = response.data  else {
-                print("no data")
-                return
-            }
-            
-            self.extractDetails(from: data)
+    func downloadLogo() {
+        APIManager.shared.downloadImageData(from: logoImageURL) { imageData in
+            guard let imageData = imageData else { return }
+            self.viewDelegate?.updateLogo(with: imageData)
         }
     }
     
     
-    
-    func extractDetails(from data: Data) {
-        
-        do {
-            if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-//                print("details", jsonResponse)
-                if let data = jsonResponse["data"] as? [String : Any] {
-                    if let idInfo = data["\(selectedCrypto.id)"] as? [String : Any] {
-                        if let symbol = idInfo["symbol"] as? String {
-                            DispatchQueue.main.async {
-                                self.viewDelegate?.updateNameLabel(with: symbol)
-                            }
-                        }
-                        if let logo = idInfo["logo"] as? String {
-                            downloadImage(from: URL(string: logo))
-                        }
-                    }
-                }
-                
-            }
-            print("no")
-        } catch {
-            print("error \(error.localizedDescription)")
-        }
-        
-    }
-    
-    
-    
-    func downloadImage(from url: URL?) {
-        guard url != nil else { return }
-        
-        Alamofire.request(url!).responseData { response in
-            guard let data = response.data, response.error == nil else { return }
-            DispatchQueue.main.async {
-                self.viewDelegate?.updateLogo(with: data)
-            }
-        }
-    }
+    // Method for currency conversion
     
     func convert(amount: String, isDirectConversion: Bool) -> String? {
+        guard amount != "" else { return "" }
+        
         guard let amount = Double(amount) else {
-            print("bad input")
+            viewDelegate?.showAlert(msg: CustomError.badUserInput.description)
             return nil
         }
         

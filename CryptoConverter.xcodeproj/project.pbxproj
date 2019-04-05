@@ -18,6 +18,9 @@
 		2CCD596C2254A79F00CB0E0B /* CryptoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD596B2254A79F00CB0E0B /* CryptoCell.swift */; };
 		2CCD596E2254AC8C00CB0E0B /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD596D2254AC8C00CB0E0B /* Crypto.swift */; };
 		2F171D3FF5C2B2EBF9520A2A /* Pods_CryptoConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC9AC8F7A3A2FB37E8811D7 /* Pods_CryptoConverter.framework */; };
+		7DC1795922573A66003EB3B2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1795822573A66003EB3B2 /* APIManager.swift */; };
+		7DC1795B22573FB1003EB3B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1795A22573FB1003EB3B2 /* Result.swift */; };
+		7DC1795E225757DA003EB3B2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1795D225757DA003EB3B2 /* CustomError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		2CCD596B2254A79F00CB0E0B /* CryptoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCell.swift; sourceTree = "<group>"; };
 		2CCD596D2254AC8C00CB0E0B /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		658A6EA1729E9DBD0AEABCE4 /* Pods-CryptoConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoConverter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoConverter/Pods-CryptoConverter.debug.xcconfig"; sourceTree = "<group>"; };
+		7DC1795822573A66003EB3B2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		7DC1795A22573FB1003EB3B2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		7DC1795D225757DA003EB3B2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		C05EF95F8D3A19F0747FE421 /* Pods-CryptoConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoConverter.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoConverter/Pods-CryptoConverter.release.xcconfig"; sourceTree = "<group>"; };
 		CBC9AC8F7A3A2FB37E8811D7 /* Pods_CryptoConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptoConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -50,13 +56,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C75CED32255EB8D008052DD /* Views */ = {
+		2C75CED32255EB8D008052DD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				2CCD59672254A44800CB0E0B /* CryptoListVC.swift */,
 				2CCD59572254A08B00CB0E0B /* ConverterVC.swift */,
 			);
-			path = Views;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		2CCAC09B2255EBD200292288 /* Models */ = {
@@ -98,11 +104,12 @@
 			isa = PBXGroup;
 			children = (
 				2CCD59552254A08B00CB0E0B /* AppDelegate.swift */,
-				2C75CED32255EB8D008052DD /* Views */,
-				2CCAC09B2255EBD200292288 /* Models */,
+				2C75CED32255EB8D008052DD /* ViewControllers */,
 				2CCAC09C2255EBDF00292288 /* Presenters */,
+				7DC1795722572D96003EB3B2 /* Views */,
+				7DC1795C225757AC003EB3B2 /* Service */,
+				2CCAC09B2255EBD200292288 /* Models */,
 				2CCD59592254A08B00CB0E0B /* Main.storyboard */,
-				2CCD596B2254A79F00CB0E0B /* CryptoCell.swift */,
 				2CCD595C2254A08B00CB0E0B /* Assets.xcassets */,
 				2CCD595E2254A08B00CB0E0B /* LaunchScreen.storyboard */,
 				2CCD59612254A08B00CB0E0B /* Info.plist */,
@@ -116,6 +123,24 @@
 				CBC9AC8F7A3A2FB37E8811D7 /* Pods_CryptoConverter.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DC1795722572D96003EB3B2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD596B2254A79F00CB0E0B /* CryptoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7DC1795C225757AC003EB3B2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7DC1795822573A66003EB3B2 /* APIManager.swift */,
+				7DC1795A22573FB1003EB3B2 /* Result.swift */,
+				7DC1795D225757DA003EB3B2 /* CustomError.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		EB2EDE79A4075934CAA9F3D4 /* Pods */ = {
@@ -240,9 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC1795B22573FB1003EB3B2 /* Result.swift in Sources */,
+				7DC1795922573A66003EB3B2 /* APIManager.swift in Sources */,
 				2CCD596E2254AC8C00CB0E0B /* Crypto.swift in Sources */,
 				2CCD596C2254A79F00CB0E0B /* CryptoCell.swift in Sources */,
 				2CCAC09E2255FA2000292288 /* ConverterPresenter.swift in Sources */,
+				7DC1795E225757DA003EB3B2 /* CustomError.swift in Sources */,
 				2CCD59582254A08B00CB0E0B /* ConverterVC.swift in Sources */,
 				2CCD596A2254A75A00CB0E0B /* CryptoListPresenter.swift in Sources */,
 				2CCD59562254A08B00CB0E0B /* AppDelegate.swift in Sources */,
